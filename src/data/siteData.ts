@@ -1,10 +1,10 @@
 export const NAV_LINKS = [
-  { label: '首頁', path: '/jst-scalp-care/' },
-  { label: '服務項目', path: '/jst-scalp-care/services/' },
-  { label: '頭皮護理', path: '/jst-scalp-care/scalp-care/' },
-  { label: '價格方案', path: '/jst-scalp-care/pricing/' },
-  { label: '常見問題', path: '/jst-scalp-care/faq/' },
-  { label: '預約聯絡', path: '/jst-scalp-care/contact/' },
+  { label: '首頁', path: '/' },
+  { label: '服務項目', path: '/services/' },
+  { label: '頭皮護理', path: '/scalp-care/' },
+  { label: '價格方案', path: '/pricing/' },
+  { label: '常見問題', path: '/faq/' },
+  { label: '預約聯絡', path: '/contact/' },
 ];
 
 export const BRAND = {
@@ -25,17 +25,17 @@ export const BRAND = {
     facebook: 'https://www.facebook.com/jst.scalpcare',
     instagram: 'https://www.instagram.com/jst.scalpcare',
   },
-  ogImage: '/jst-scalp-care/images/hero-bg.jpg',
-  url: 'https://lixiaming01027592891-crypto.github.io/jst-scalp-care/',
+  ogImage: '/images/hero-bg.jpg',
+  url: 'https://jst-scalp-care.pages.dev/',
 };
 
 export const SERVICES = [
-  { id: 'detect', title: '頭皮檢測分析', duration: '30 min', desc: '高倍率專業儀器檢視頭皮油脂、角質、毛囊狀態，搭配生活習慣諮詢，了解頭皮真實需求。', image: '/jst-scalp-care/images/service-detect.jpg', tags: ['首次推薦', '科學分析'] },
-  { id: 'clean', title: '頭皮深層清潔', duration: '60 min', desc: '溫和胺基酸洗淨 + 角質更新護理，淨化日常堆積的油脂與髒污，讓頭皮回到清爽狀態。', image: '/jst-scalp-care/images/service-clean.jpg', tags: ['清爽感', '基礎保養'] },
-  { id: 'spa', title: '頭皮舒壓 SPA', duration: '90 min', desc: '精油頭部按摩 + 頸肩舒壓 + 溫感蒸氣導入，釋放累積的緊繃與壓力。', image: '/jst-scalp-care/images/service-spa.jpg', tags: ['舒壓首選', '精油芳療'] },
-  { id: 'care', title: '頭皮養護課程', duration: '75 min', desc: '精華液導入 + 專業養護手法 + 居家保養建議，維持健康的頭皮環境。', image: '/jst-scalp-care/images/service-care.jpg', tags: ['精華導入', '持續養護'] },
-  { id: 'oily', title: '油性頭皮護理', duration: '75 min', desc: '針對出油困擾，調節油脂平衡，淨化毛囊，減少因油脂堆積帶來的不適感。', image: '/jst-scalp-care/images/service-problem.jpg', tags: ['調節油脂', '淨化毛囊'] },
-  { id: 'dry', title: '乾癢/頭皮屑護理', duration: '75 min', desc: '溫和舒緩乾燥緊繃，補充保濕，緩解因乾燥引起的癢感與屑屑困擾。', image: '/jst-scalp-care/images/service-problem.jpg', tags: ['舒緩保濕', '溫和護理'] },
+  { id: 'detect', title: '頭皮檢測分析', duration: '30 min', desc: '高倍率專業儀器檢視頭皮油脂、角質、毛囊狀態，搭配生活習慣諮詢，了解頭皮真實需求。', image: '/images/service-detect.jpg', tags: ['首次推薦', '科學分析'] },
+  { id: 'clean', title: '頭皮深層清潔', duration: '60 min', desc: '溫和胺基酸洗淨 + 角質更新護理，淨化日常堆積的油脂與髒污，讓頭皮回到清爽狀態。', image: '/images/service-clean.jpg', tags: ['清爽感', '基礎保養'] },
+  { id: 'spa', title: '頭皮舒壓 SPA', duration: '90 min', desc: '精油頭部按摩 + 頸肩舒壓 + 溫感蒸氣導入，釋放累積的緊繃與壓力。', image: '/images/service-spa.jpg', tags: ['舒壓首選', '精油芳療'] },
+  { id: 'care', title: '頭皮養護課程', duration: '75 min', desc: '精華液導入 + 專業養護手法 + 居家保養建議，維持健康的頭皮環境。', image: '/images/service-care.jpg', tags: ['精華導入', '持續養護'] },
+  { id: 'oily', title: '油性頭皮護理', duration: '75 min', desc: '針對出油困擾，調節油脂平衡，淨化毛囊，減少因油脂堆積帶來的不適感。', image: '/images/service-problem.jpg', tags: ['調節油脂', '淨化毛囊'] },
+  { id: 'dry', title: '乾癢/頭皮屑護理', duration: '75 min', desc: '溫和舒緩乾燥緊繃，補充保濕，緩解因乾燥引起的癢感與屑屑困擾。', image: '/images/service-problem.jpg', tags: ['舒緩保濕', '溫和護理'] },
 ];
 
 export const PRICING = [
