@@ -10,7 +10,7 @@ const desc = `${BRAND.description} 提供頭皮檢測、深層清潔、頭皮SPA
 <Layout title={title} description={desc}>
   <!-- Hero -->
   <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-    <img src="/jst-scalp-care/images/hero-bg.jpg" alt="JST 頭皮護理沙龍空間" class="absolute inset-0 w-full h-full object-cover" loading="eager" />
+    <img src="/images/hero-bg.jpg" alt="JST 頭皮護理沙龍空間" class="absolute inset-0 w-full h-full object-cover" loading="eager" />
     <div class="absolute inset-0 bg-cream/30"></div>
     <div class="relative z-10 text-center px-6 max-w-3xl mx-auto animate-on-scroll">
       <h1 class="text-4xl md:text-5xl lg:text-hero font-bold text-text-primary mb-6 leading-tight">
@@ -21,10 +21,10 @@ const desc = `${BRAND.description} 提供頭皮檢測、深層清潔、頭皮SPA
         給自己一場溫柔的保養儀式
       </p>
       <div class="flex gap-4 justify-center flex-wrap">
-        <a href="/jst-scalp-care/contact/" class="inline-flex items-center bg-sage text-white rounded-pill px-8 py-3.5 font-medium hover:bg-sage-dark hover:-translate-y-0.5 transition-all shadow-cta">
+        <a href="/contact/" class="inline-flex items-center bg-sage text-white rounded-pill px-8 py-3.5 font-medium hover:bg-sage-dark hover:-translate-y-0.5 transition-all shadow-cta">
           立即預約體驗
         </a>
-        <a href="/jst-scalp-care/services/" class="inline-flex items-center border-[1.5px] border-sage text-sage rounded-pill px-8 py-3.5 font-medium hover:bg-sage hover:text-white hover:-translate-y-0.5 transition-all">
+        <a href="/services/" class="inline-flex items-center border-[1.5px] border-sage text-sage rounded-pill px-8 py-3.5 font-medium hover:bg-sage hover:text-white hover:-translate-y-0.5 transition-all">
           了解服務項目
         </a>
       </div>
@@ -49,7 +49,7 @@ const desc = `${BRAND.description} 提供頭皮檢測、深層清潔、頭皮SPA
         </p>
       </div>
       <div class="animate-on-scroll delay-2">
-        <img src="/jst-scalp-care/images/about-space.jpg" alt="JST 沙龍環境" class="rounded-card shadow-card object-cover w-full aspect-video" loading="lazy" />
+        <img src="/images/about-space.jpg" alt="JST 沙龍環境" class="rounded-card shadow-card object-cover w-full aspect-video" loading="lazy" />
       </div>
     </div>
   </section>
@@ -63,7 +63,7 @@ const desc = `${BRAND.description} 提供頭皮檢測、深層清潔、頭皮SPA
       </div>
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {SERVICES.slice(0,4).map((s, i) => (
-          <a href="/jst-scalp-care/services/" class="group bg-white rounded-card shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 animate-on-scroll" style={`transition-delay:${i*0.1}s`}>
+          <a href="/services/" class="group bg-white rounded-card shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 animate-on-scroll" style={`transition-delay:${i*0.1}s`}>
             <div class="rounded-card overflow-hidden aspect-[4/3] m-4 mb-0">
               <img src={s.image} alt={s.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
             </div>
@@ -112,7 +112,7 @@ const desc = `${BRAND.description} 提供頭皮檢測、深層清潔、頭皮SPA
       <div class="grid md:grid-cols-3 gap-6">
         {['ambiance-1.jpg','ambiance-2.jpg','ambiance-3.jpg'].map((img, i) => (
           <div class="rounded-card overflow-hidden shadow-card hover:shadow-card-hover transition-shadow animate-on-scroll" style={`transition-delay:${i*0.1}s`}>
-            <img src={`/jst-scalp-care/images/${img}`} alt={`JST 沙龍環境 ${i+1}`} class="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
+            <img src={`/images/${img}`} alt={`JST 沙龍環境 ${i+1}`} class="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
           </div>
         ))}
       </div>
