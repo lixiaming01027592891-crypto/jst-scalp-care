@@ -10,7 +10,7 @@ export const NAV_LINKS = [
 export const BRAND = {
   name: 'JST 頭皮護理',
   tagline: '讓頭皮，回到最舒適的狀態',
-  description: '新竹專業頭皮養護與舒壓 SPA。提供頭皮檢測、深層清潔、頭皮SPA、頭皮養護等服務。',
+  description: '新竹專業頭皮養護與舒壓 SPA',
   address: '新竹市東區光復路一段 XXX 號',
   phone: '03-528-XXXX',
   phoneClean: '03528XXXX',
@@ -25,7 +25,7 @@ export const BRAND = {
     facebook: 'https://www.facebook.com/jst.scalpcare',
     instagram: 'https://www.instagram.com/jst.scalpcare',
   },
-  ogImage: '/images/hero-bg.jpg',
+  ogImage: 'images/hero-bg.jpg',
   url: 'https://jst-scalp-care.pages.dev/',
 };
 
