@@ -1,0 +1,143 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { BRAND, PRICING, ADDONS } from '../data/siteData';
+
+const title = '價格方案 | JST 頭皮護理';
+const desc = 'JST 頭皮護理價格透明公開。單次體驗 NT$1,280 起，提供基礎養護與深度護理方案，另有會員儲值優惠。';
+---
+
+<Layout title={title} description={desc}>
+  <div class="bg-gradient-to-br from-ivory to-cream pt-32 pb-16 text-center border-b border-sage-light">
+    <div class="container-main">
+      <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-4">價格方案</h1>
+      <p class="text-lg text-text-secondary max-w-xl mx-auto">透明公開的價格，讓您安心選擇適合的保養計畫</p>
+    </div>
+  </div>
+
+  <!-- Pricing Cards -->
+  <section class="py-20 bg-cream">
+    <div class="container-main">
+      <div class="grid md:grid-cols-3 gap-6">
+        {PRICING.map((plan, i) => (
+          <div class={`relative bg-white rounded-pricing p-8 text-center transition-all duration-300 hover:-translate-y-1.5 hover:shadow-pricing-hover animate-on-scroll ${plan.featured ? 'border-2 border-gold bg-gradient-to-b from-ivory to-cream' : 'border border-sage-light'}`} style={`transition-delay:${i*0.1}s`}>
+            {plan.badge && (
+              <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gold text-white text-xs font-bold px-4 py-1 rounded-pill">{plan.badge}</span>
+            )}
+            <h3 class="text-xl font-bold text-text-primary mb-2">{plan.name}</h3>
+            <div class="text-4xl font-bold text-sage-dark mb-2">NT${plan.price.toLocaleString()}<span class="text-base font-normal text-text-secondary ml-1">/次</span></div>
+            <p class="text-sm text-text-secondary mb-6">{plan.target}</p>
+            <ul class="text-left space-y-3 mb-8">
+              {plan.features.map(f => (
+                <li class="flex items-center gap-2 text-sm text-text-secondary pb-2 border-b border-sage-light">
+                  <svg class="w-4 h-4 text-sage flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <a href="/jst-scalp-care/contact/" class={`inline-flex items-center rounded-pill px-8 py-3 font-medium transition-all hover:-translate-y-0.5 ${plan.id === 'basic' ? 'bg-sage text-white hover:bg-sage-dark shadow-cta' : plan.id === 'deep' ? 'bg-gold text-white hover:bg-gold/90 shadow-md' : 'border-[1.5px] border-sage text-sage hover:bg-sage hover:text-white'}`}>
+              選擇此方案
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Add-ons -->
+  <section class="py-16 bg-ivory">
+    <div class="container-main">
+      <h2 class="text-2xl font-bold text-text-primary text-center mb-8">加購項目</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {ADDONS.map(a => (
+          <div class="bg-white rounded-card p-6 text-center shadow-card">
+            <div class="text-2xl font-bold text-sage-dark mb-1">NT${a.price}</div>
+            <p class="text-sm text-text-secondary">{a.name}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Membership -->
+  <section class="py-16 bg-cream">
+    <div class="container-main">
+      <h2 class="text-2xl font-bold text-text-primary text-center mb-8">會員儲值優惠</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        {[
+          { name: '銀卡會員', deposit: 5000, discount: '9 折', color: 'text-gray-400', bg: 'bg-gray-50', border: 'border-gray-200' },
+          { name: '金卡會員', deposit: 10000, discount: '85 折', color: 'text-gold', bg: 'bg-gold-light/30', border: 'border-gold/30' },
+          { name: '黑卡會員', deposit: 20000, discount: '8 折', color: 'text-text-primary', bg: 'bg-gray-100', border: 'border-gray-300' },
+        ].map((m, i) => (
+          <div class={`rounded-card p-6 text-center border ${m.border} ${m.bg} animate-on-scroll`} style={`transition-delay:${i*0.1}s`}>
+            <div class={`text-3xl mb-3 ${m.color}`}>
+              {i === 0 && <svg class="w-10 h-10 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/></svg>}
+              {i === 1 && <svg class="w-10 h-10 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>}
+              {i === 2 && <svg class="w-10 h-10 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>}
+            </div>
+            <h3 class="font-bold text-text-primary mb-2">{m.name}</h3>
+            <div class="text-2xl font-bold text-sage-dark mb-1">儲值 NT${m.deposit.toLocaleString()}</div>
+            <p class="text-sm text-text-secondary">享 {m.discount} 優惠</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Notice -->
+  <section class="py-12 bg-[#FFF8F5]">
+    <div class="container-main">
+      <h3 class="flex items-center gap-2 text-lg font-bold text-text-primary mb-4">
+        <svg class="w-5 h-5 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        貼心提醒
+      </h3>
+      <ul class="space-y-2 text-sm text-text-secondary">
+        <li class="flex items-start gap-2"><svg class="w-4 h-4 text-sage mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>所有療程效果因個人體質與生活習慣而異</li>
+        <li class="flex items-start gap-2"><svg class="w-4 h-4 text-sage mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>建議療程次數僅供參考，實際以專業評估為準</li>
+        <li class="flex items-start gap-2"><svg class="w-4 h-4 text-sage mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>本店非醫療機構，不提供疾病診斷與治療</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- FAQ Mini -->
+  <section class="py-16 bg-cream">
+    <div class="container-main max-w-3xl">
+      <h2 class="text-2xl font-bold text-text-primary text-center mb-8">價格常見問題</h2>
+      {[
+        { q: '可以單買頭皮檢測嗎？', a: '可以，頭皮檢測單次 NT$300。但我們建議搭配療程，讓專業人員為您規劃最適合的保養方案。' },
+        { q: '會員儲值有期限嗎？', a: '會員儲值金額無使用期限，可隨時使用於任何療程。儲值金額不可退換現金。' },
+        { q: '療程中可以加購項目嗎？', a: '可以，療程中可隨時加購項目。加購費用可從會員儲值中扣除，或現場支付。' },
+      ].map((faq, i) => (
+        <div class="faq-item bg-white rounded-card mb-3 shadow-sm overflow-hidden">
+          <button class="faq-question w-full flex justify-between items-center p-5 text-left font-medium text-text-primary hover:bg-cream/50 transition-colors" data-index={i}>
+            <span>{faq.q}</span>
+            <svg class="faq-icon w-4 h-4 text-sage transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="px-5 pb-5 text-text-secondary text-sm leading-relaxed">{faq.a}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const wasActive = item.classList.contains('active');
+        document.querySelectorAll('.faq-item.active').forEach(el => el.classList.remove('active'));
+        if (!wasActive) item.classList.add('active');
+      });
+    });
+  </script>
+
+  <!-- CTA -->
+  <section class="py-20 text-center bg-gradient-to-br from-sage-light to-ivory">
+    <div class="container-main animate-on-scroll">
+      <h2 class="text-3xl font-bold text-text-primary mb-4">選擇適合您的方案，開始保養之旅</h2>
+      <a href="/jst-scalp-care/contact/" class="inline-flex items-center bg-sage text-white rounded-pill px-8 py-3.5 font-medium hover:bg-sage-dark hover:-translate-y-0.5 transition-all shadow-cta">
+        立即預約
+      </a>
+    </div>
+  </section>
+</Layout>

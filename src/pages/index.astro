@@ -1,0 +1,140 @@
+---
+import Layout from '../layouts/Layout.astro';
+import FloatingContact from '../components/FloatingContact.astro';
+import { BRAND, SERVICES, STEPS } from '../data/siteData';
+
+const title = `${BRAND.name} | 新竹專業頭皮養護與舒壓 SPA`;
+const desc = `${BRAND.description} 提供頭皮檢測、深層清潔、頭皮SPA、頭皮養護等服務。LINE預約、電話 ${BRAND.phone}。`;
+---
+
+<Layout title={title} description={desc}>
+  <!-- Hero -->
+  <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+    <img src="/jst-scalp-care/images/hero-bg.jpg" alt="JST 頭皮護理沙龍空間" class="absolute inset-0 w-full h-full object-cover" loading="eager" />
+    <div class="absolute inset-0 bg-cream/30"></div>
+    <div class="relative z-10 text-center px-6 max-w-3xl mx-auto animate-on-scroll">
+      <h1 class="text-4xl md:text-5xl lg:text-hero font-bold text-text-primary mb-6 leading-tight">
+        讓頭皮，回到最舒適的狀態
+      </h1>
+      <p class="text-lg md:text-xl text-text-secondary max-w-2xl mx-auto mb-10 leading-relaxed">
+        專業頭皮檢測 × 深層養護 × 舒壓 SPA<br class="hidden md:block" />
+        給自己一場溫柔的保養儀式
+      </p>
+      <div class="flex gap-4 justify-center flex-wrap">
+        <a href="/jst-scalp-care/contact/" class="inline-flex items-center bg-sage text-white rounded-pill px-8 py-3.5 font-medium hover:bg-sage-dark hover:-translate-y-0.5 transition-all shadow-cta">
+          立即預約體驗
+        </a>
+        <a href="/jst-scalp-care/services/" class="inline-flex items-center border-[1.5px] border-sage text-sage rounded-pill px-8 py-3.5 font-medium hover:bg-sage hover:text-white hover:-translate-y-0.5 transition-all">
+          了解服務項目
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brand Story -->
+  <section class="py-20 bg-cream">
+    <div class="container-main grid md:grid-cols-2 gap-12 items-center">
+      <div class="animate-on-scroll">
+        <h2 class="text-3xl md:text-4xl font-bold text-text-primary mb-6 leading-tight">
+          JST 頭皮護理<br />新竹的療癒角落
+        </h2>
+        <p class="text-text-secondary leading-relaxed mb-4">
+          在繁忙的都市生活中，我們相信頭皮也需要被溫柔對待。JST 頭皮護理位於新竹市東區，是一個專注於頭皮健康與身心舒壓的療癒空間。
+        </p>
+        <p class="text-text-secondary leading-relaxed mb-4">
+          我們不提供誇大的承諾，只給您專業的檢測、溫和的手法、舒適的環境。每一次療程，都是一場屬於自己的保養儀式。
+        </p>
+        <p class="text-text-secondary leading-relaxed">
+          無論您是頭皮出油、乾癢、緊繃，或是單純想放鬆，我們都歡迎您來體驗。讓我們從了解您的頭皮開始，一起找到最適合的保養方式。
+        </p>
+      </div>
+      <div class="animate-on-scroll delay-2">
+        <img src="/jst-scalp-care/images/about-space.jpg" alt="JST 沙龍環境" class="rounded-card shadow-card object-cover w-full aspect-video" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Services -->
+  <section class="py-20 bg-ivory">
+    <div class="container-main">
+      <div class="text-center mb-12 animate-on-scroll">
+        <h2 class="text-3xl md:text-4xl font-bold text-text-primary mb-4">核心服務</h2>
+        <p class="text-text-secondary max-w-xl mx-auto">從檢測到養護，給頭皮全方位的溫柔呵護</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {SERVICES.slice(0,4).map((s, i) => (
+          <a href="/jst-scalp-care/services/" class="group bg-white rounded-card shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 animate-on-scroll" style={`transition-delay:${i*0.1}s`}>
+            <div class="rounded-card overflow-hidden aspect-[4/3] m-4 mb-0">
+              <img src={s.image} alt={s.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+            </div>
+            <div class="p-5">
+              <h3 class="text-lg font-bold text-text-primary mb-2">{s.title}</h3>
+              <p class="text-sm text-text-secondary leading-relaxed">{s.desc}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Flow -->
+  <section class="py-20 bg-cream">
+    <div class="container-main">
+      <div class="text-center mb-12 animate-on-scroll">
+        <h2 class="text-3xl md:text-4xl font-bold text-text-primary mb-4">體驗流程</h2>
+        <p class="text-text-secondary">五個步驟，給頭皮一場完整的療癒旅程</p>
+      </div>
+      <div class="relative">
+        <!-- Desktop timeline line -->
+        <div class="hidden md:block absolute top-6 left-[10%] right-[10%] h-0.5 bg-sage-light"></div>
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-8 relative">
+          {STEPS.map((step, i) => (
+            <div class="flex flex-col items-center text-center animate-on-scroll" style={`transition-delay:${i*0.1}s`}>
+              <div class="w-12 h-12 rounded-full bg-sage text-white flex items-center justify-center font-bold text-lg relative z-10 mb-4 shadow-md">
+                {step.step}
+              </div>
+              <h3 class="font-bold text-text-primary mb-2">{step.title}</h3>
+              <p class="text-sm text-text-secondary">{step.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Environment -->
+  <section class="py-20 bg-ivory">
+    <div class="container-main">
+      <div class="text-center mb-12 animate-on-scroll">
+        <h2 class="text-3xl md:text-4xl font-bold text-text-primary mb-4">沙龍環境</h2>
+        <p class="text-text-secondary">安靜、舒適、讓您完全放鬆的療癒空間</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {['ambiance-1.jpg','ambiance-2.jpg','ambiance-3.jpg'].map((img, i) => (
+          <div class="rounded-card overflow-hidden shadow-card hover:shadow-card-hover transition-shadow animate-on-scroll" style={`transition-delay:${i*0.1}s`}>
+            <img src={`/jst-scalp-care/images/${img}`} alt={`JST 沙龍環境 ${i+1}`} class="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 text-center bg-gradient-to-br from-sage-light to-ivory">
+    <div class="container-main animate-on-scroll">
+      <h2 class="text-3xl md:text-4xl font-bold text-text-primary mb-4">準備好給頭皮一場放鬆之旅了嗎？</h2>
+      <p class="text-text-secondary max-w-md mx-auto mb-8">首次體驗即贈頭皮檢測，讓我們從了解開始</p>
+      <div class="flex gap-4 justify-center flex-wrap">
+        <a href={BRAND.social.line} target="_blank" class="inline-flex items-center gap-2 bg-line text-white rounded-pill px-8 py-3.5 font-medium hover:bg-line-dark hover:-translate-y-0.5 transition-all shadow-md">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5-3.016c.348 0 .63.285.63.631 0 .345-.282.63-.63.63H9.804v1.125h1.706c.349 0 .631.283.631.63 0 .344-.282.629-.631.629H9.078c-.344 0-.626-.285-.626-.629V8.108c0-.345.282-.63.63-.63h2.432c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H9.804v1.125h1.706z"/></svg>
+          LINE 預約
+        </a>
+        <a href={`tel:${BRAND.phoneClean}`} class="inline-flex items-center border-[1.5px] border-sage text-sage rounded-pill px-8 py-3.5 font-medium hover:bg-sage hover:text-white hover:-translate-y-0.5 transition-all">
+          電話諮詢 {BRAND.phone}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <FloatingContact />
+</Layout>

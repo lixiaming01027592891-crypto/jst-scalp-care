@@ -1,0 +1,83 @@
+---
+import { BRAND, NAV_LINKS } from '../data/siteData';
+const currentPath = Astro.url.pathname;
+---
+
+<nav class="fixed top-0 left-0 right-0 h-[72px] bg-white/90 backdrop-blur-md z-50 shadow-[0_1px_0_rgba(0,0,0,0.05)] transition-shadow" id="navbar">
+  <div class="container-main flex items-center justify-between h-full">
+    <a href="/jst-scalp-care/" class="text-xl font-bold tracking-wide text-text-primary">
+      <span class="text-sage">JST</span> 頭皮護理
+    </a>
+    
+    <!-- Desktop menu -->
+    <div class="hidden md:flex items-center gap-8">
+      {NAV_LINKS.map(link => {
+        const isActive = currentPath === link.path || currentPath === link.path.replace(/\/$/, '');
+        return (
+          <a 
+            href={link.path} 
+            class={`text-[0.9375rem] font-medium transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:bg-sage after:transition-all after:duration-300 ${isActive ? 'text-sage after:w-full' : 'text-text-primary hover:text-sage after:w-0 hover:after:w-full'}`}
+          >
+            {link.label}
+          </a>
+        );
+      })}
+    </div>
+    
+    <!-- Desktop CTA -->
+    <a href={BRAND.social.line} target="_blank" class="hidden md:inline-flex items-center bg-line text-white rounded-pill px-5 py-2 text-sm font-medium hover:bg-line-dark transition-colors">
+      LINE 預約
+    </a>
+    
+    <!-- Mobile hamburger -->
+    <button class="md:hidden flex flex-col gap-[5px] p-2" id="navToggle" aria-label="選單">
+      <span class="block w-6 h-[2px] bg-text-primary transition-all" id="h1"></span>
+      <span class="block w-6 h-[2px] bg-text-primary transition-all" id="h2"></span>
+      <span class="block w-6 h-[2px] bg-text-primary transition-all" id="h3"></span>
+    </button>
+  </div>
+  
+  <!-- Mobile menu -->
+  <div class="hidden md:hidden absolute top-[72px] left-0 right-0 bg-white/98 backdrop-blur-md shadow-lg" id="mobileMenu">
+    <div class="container-main flex flex-col py-4 gap-1">
+      {NAV_LINKS.map(link => (
+        <a href={link.path} class="py-3 text-text-primary font-medium border-b border-sage-light hover:text-sage transition-colors">{link.label}</a>
+      ))}
+      <a href={BRAND.social.line} target="_blank" class="mt-3 inline-flex items-center justify-center bg-line text-white rounded-pill px-5 py-2.5 text-sm font-medium hover:bg-line-dark transition-colors">
+        LINE 預約
+      </a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const menu = document.getElementById('mobileMenu');
+  const h1 = document.getElementById('h1');
+  const h2 = document.getElementById('h2');
+  const h3 = document.getElementById('h3');
+  const nav = document.getElementById('navbar');
+  
+  if (toggle && menu) {
+    let open = false;
+    toggle.addEventListener('click', () => {
+      open = !open;
+      menu.classList.toggle('hidden', !open);
+      h1.style.transform = open ? 'rotate(45deg) translate(5px,5px)' : '';
+      h2.style.opacity = open ? '0' : '1';
+      h3.style.transform = open ? 'rotate(-45deg) translate(5px,-5px)' : '';
+    });
+    
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      open = false;
+      menu.classList.add('hidden');
+      h1.style.transform = '';
+      h2.style.opacity = '1';
+      h3.style.transform = '';
+    }));
+  }
+  
+  window.addEventListener('scroll', () => {
+    if (nav) nav.style.boxShadow = window.scrollY > 50 ? '0 2px 12px rgba(0,0,0,0.08)' : '0 1px 0 rgba(0,0,0,0.05)';
+  });
+</script>

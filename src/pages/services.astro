@@ -1,0 +1,92 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SERVICES } from '../data/siteData';
+
+const title = '服務項目 | JST 頭皮護理';
+const desc = 'JST 頭皮護理提供專業頭皮檢測、深層清潔、頭皮SPA、頭皮養護、油性頭皮護理、乾癢護理等完整服務。';
+---
+
+<Layout title={title} description={desc}>
+  <!-- Page Header -->
+  <div class="bg-gradient-to-br from-ivory to-cream pt-32 pb-16 text-center border-b border-sage-light">
+    <div class="container-main">
+      <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-4">服務項目</h1>
+      <p class="text-lg text-text-secondary max-w-xl mx-auto leading-relaxed">
+        從檢測到養護，為您規劃專屬的頭皮保養旅程
+      </p>
+    </div>
+  </div>
+
+  <!-- Service Cards -->
+  <section class="py-20 bg-cream">
+    <div class="container-main space-y-12">
+      {SERVICES.map((s, i) => (
+        <div class={`grid md:grid-cols-2 gap-8 items-center animate-on-scroll ${i % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
+          <div class={i % 2 === 1 ? 'md:order-2' : ''}>
+            <div class="rounded-card overflow-hidden shadow-card aspect-[4/3]">
+              <img src={s.image} alt={s.title} class="w-full h-full object-cover" loading="lazy" />
+            </div>
+          </div>
+          <div class={i % 2 === 1 ? 'md:order-1' : ''}>
+            <span class="inline-block bg-sage-light text-sage-dark text-xs px-3 py-1 rounded-full font-medium mb-3">{s.duration}</span>
+            <h2 class="text-2xl md:text-3xl font-bold text-text-primary mb-4">{s.title}</h2>
+            <p class="text-text-secondary leading-relaxed mb-4">{s.desc}</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              {s.tags.map(tag => (
+                <span class="text-xs bg-cream text-text-secondary px-3 py-1 rounded-full border border-sage-light">{tag}</span>
+              ))}
+            </div>
+            <p class="text-xs text-text-light">* 效果因個人體質與生活習慣而異</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Comparison -->
+  <section class="py-16 bg-ivory">
+    <div class="container-main">
+      <h2 class="text-2xl md:text-3xl font-bold text-text-primary text-center mb-8">服務比較</h2>
+      <div class="bg-white rounded-card shadow-card overflow-hidden overflow-x-auto">
+        <table class="w-full min-w-[600px]">
+          <thead>
+            <tr class="bg-sage text-white">
+              <th class="px-6 py-4 text-left font-medium">服務項目</th>
+              <th class="px-6 py-4 text-left font-medium">適合對象</th>
+              <th class="px-6 py-4 text-left font-medium">主要作用</th>
+              <th class="px-6 py-4 text-left font-medium">建議頻率</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              ['頭皮檢測分析', '首次來店 / 想了解頭皮狀態', '科學分析頭皮健康', '每月一次'],
+              ['頭皮深層清潔', '頭皮易出油 / 角質堆積', '淨化油脂與髒污', '2-4 週'],
+              ['頭皮舒壓 SPA', '壓力大 / 想放鬆', '精油按摩舒壓', '2-4 週'],
+              ['頭皮養護課程', '需長期保養', '精華導入養護', '2-4 週'],
+              ['油性頭皮護理', '出油困擾', '調節油脂平衡', '1-2 週'],
+              ['乾癢/頭皮屑護理', '乾燥緊繃 / 屑屑困擾', '舒緩保濕', '1-2 週'],
+            ].map((row, i) => (
+              <tr class={i % 2 === 0 ? 'bg-cream' : 'bg-white'}>
+                <td class="px-6 py-4 font-medium text-text-primary">{row[0]}</td>
+                <td class="px-6 py-4 text-text-secondary text-sm">{row[1]}</td>
+                <td class="px-6 py-4 text-text-secondary text-sm">{row[2]}</td>
+                <td class="px-6 py-4 text-text-secondary text-sm">{row[3]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 text-center bg-gradient-to-br from-sage-light to-ivory">
+    <div class="container-main animate-on-scroll">
+      <h2 class="text-3xl font-bold text-text-primary mb-4">不確定哪個服務適合您？</h2>
+      <p class="text-text-secondary mb-8">首次體驗贈頭皮檢測，讓專業人員為您建議</p>
+      <a href="/jst-scalp-care/contact/" class="inline-flex items-center bg-sage text-white rounded-pill px-8 py-3.5 font-medium hover:bg-sage-dark hover:-translate-y-0.5 transition-all shadow-cta">
+        預約免費檢測
+      </a>
+    </div>
+  </section>
+</Layout>

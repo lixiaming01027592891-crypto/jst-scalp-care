@@ -1,0 +1,115 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { KNOWLEDGE, PROBLEMS, TIPS } from '../data/siteData';
+
+const title = '頭皮護理介紹 | JST 頭皮護理';
+const desc = '了解為什麼需要頭皮護理、常見頭皮困擾、日常保養建議。JST 頭皮護理提供專業知識與溫柔呵護。';
+---
+
+<Layout title={title} description={desc}>
+  <!-- Page Header -->
+  <div class="bg-gradient-to-br from-ivory to-cream pt-32 pb-16 text-center border-b border-sage-light">
+    <div class="container-main">
+      <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-4">為什麼需要頭皮護理？</h1>
+      <p class="text-lg text-text-secondary max-w-xl mx-auto leading-relaxed">
+        頭皮是臉皮的延伸，值得同樣細緻的呵護
+      </p>
+    </div>
+  </div>
+
+  <!-- Knowledge -->
+  <section class="py-20 bg-cream">
+    <div class="container-main">
+      <h2 class="text-3xl font-bold text-text-primary text-center mb-12 animate-on-scroll">頭皮，你不可不知的事</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        {KNOWLEDGE.map((k, i) => (
+          <div class="bg-white rounded-card p-8 shadow-card text-center animate-on-scroll" style={`transition-delay:${i*0.1}s`}>
+            <div class="w-14 h-14 rounded-full bg-sage-light text-sage-dark flex items-center justify-center mx-auto mb-5">
+              {k.icon === 'smile' && <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>}
+              {k.icon === 'sprout' && <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>}
+              {k.icon === 'calendar' && <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>}
+            </div>
+            <h3 class="text-lg font-bold text-text-primary mb-3">{k.title}</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">{k.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem Signs -->
+  <section class="py-20 bg-ivory">
+    <div class="container-main">
+      <h2 class="text-3xl font-bold text-text-primary text-center mb-12 animate-on-scroll">這些跡象，是頭皮在提醒你了</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {PROBLEMS.map((p, i) => (
+          <div class="bg-white rounded-card p-6 text-center animate-on-scroll" style={`transition-delay:${i*0.08}s`}>
+            <div class="w-12 h-12 rounded-full bg-sage-light text-sage-dark flex items-center justify-center mx-auto mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
+            </div>
+            <h3 class="font-bold text-text-primary mb-2">{p.title}</h3>
+            <p class="text-sm text-text-secondary mb-3">{p.desc}</p>
+            <a href="/jst-scalp-care/services/" class="text-sm text-sage hover:text-sage-dark font-medium">了解對應護理 →</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="py-20 bg-cream">
+    <div class="container-main">
+      <h2 class="text-3xl font-bold text-text-primary text-center mb-12 animate-on-scroll">為什麼選擇 JST？</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        {[
+          { num: '01', title: '專業檢測儀器', desc: '科學分析，不是憑感覺。高倍率儀器精準了解頭皮狀態。' },
+          { num: '02', title: '客製化課程', desc: '依頭皮狀態調整，不會一體適用。每個人都是獨特的。' },
+          { num: '03', title: '舒壓環境', desc: '安靜空間，療程中完全放鬆。這是屬於您的療癒時光。' },
+          { num: '04', title: '持續追蹤', desc: '每次療程記錄，看見變化過程。我們與您一起進步。' },
+        ].map((item, i) => (
+          <div class="bg-white rounded-card p-8 shadow-card flex gap-6 items-start animate-on-scroll" style={`transition-delay:${i*0.1}s`}>
+            <span class="text-4xl font-bold text-sage-light flex-shrink-0">{item.num}</span>
+            <div>
+              <h3 class="text-lg font-bold text-text-primary mb-2">{item.title}</h3>
+              <p class="text-text-secondary text-sm leading-relaxed">{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Daily Tips -->
+  <section class="py-20 bg-gradient-to-b from-sage-light to-cream">
+    <div class="container-main grid md:grid-cols-2 gap-12 items-center">
+      <div class="animate-on-scroll">
+        <img src="/jst-scalp-care/images/scalp-illust.jpg" alt="頭皮護理知識" class="rounded-card shadow-card object-cover w-full aspect-video" loading="lazy" />
+      </div>
+      <div class="animate-on-scroll delay-2">
+        <h2 class="text-3xl font-bold text-text-primary mb-8">日常也能做的頭皮保養</h2>
+        <ul class="space-y-4">
+          {TIPS.map((tip, i) => (
+            <li class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-sage flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <span class="text-text-secondary">{tip}</span>
+            </li>
+          ))}
+        </ul>
+        <a href="/jst-scalp-care/services/" class="inline-flex items-center mt-8 border-[1.5px] border-sage text-sage rounded-pill px-6 py-2.5 font-medium hover:bg-sage hover:text-white transition-all">
+          了解更多服務
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 text-center bg-gradient-to-br from-sage-light to-ivory">
+    <div class="container-main animate-on-scroll">
+      <h2 class="text-3xl font-bold text-text-primary mb-4">每個月給頭皮一次深呼吸</h2>
+      <p class="text-text-secondary mb-8">定期保養，是對自己溫柔的堅持</p>
+      <a href="/jst-scalp-care/contact/" class="inline-flex items-center bg-sage text-white rounded-pill px-8 py-3.5 font-medium hover:bg-sage-dark hover:-translate-y-0.5 transition-all shadow-cta">
+        立即預約
+      </a>
+    </div>
+  </section>
+</Layout>
