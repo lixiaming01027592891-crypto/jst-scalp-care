@@ -23,7 +23,7 @@ const schema = {
   "@type": "LocalBusiness",
   "name": BRAND.name,
   "description": description,
-  "url": BRAND.url,
+  "url": canonical,
   "telephone": BRAND.phoneClean,
   "email": BRAND.email,
   "address": {
@@ -57,7 +57,7 @@ const schema = {
   <link rel="sitemap" href="/sitemap.xml" type="application/xml" />
   
   <!-- Open Graph -->
-  <meta property="og:type" content="business.business" />
+  <meta property="og:type" content="website" />
   <meta property="og:url" content={canonical} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
