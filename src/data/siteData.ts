@@ -8,9 +8,9 @@ export const NAV_LINKS = [
 ];
 
 export const BRAND = {
-  name: 'JST 頭皮護理',
+  name: 'JSt.*頭皮養護中心',
   tagline: '讓頭皮，回到最舒適的狀態',
-  description: '新竹專業頭皮養護與舒壓 SPA',
+  description: 'Scalp Care Art Center | 新竹專業頭皮養護與舒壓 SPA',
   address: '新竹市東區光復路一段 XXX 號',
   phone: '03-528-XXXX',
   phoneClean: '03528XXXX',
