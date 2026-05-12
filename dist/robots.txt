@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jst-scalp-care.pages.dev/sitemap.xml
+Sitemap: https://jstscalpcare.com/sitemap.xml
