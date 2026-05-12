@@ -26,7 +26,7 @@ export const BRAND = {
     instagram: 'https://www.instagram.com/jst.scalpcare',
   },
   ogImage: 'images/hero-bg.jpg',
-  url: 'https://jst-scalp-care.pages.dev/',
+  url: 'https://jstscalpcare.com/',
 };
 
 export const SERVICES = [
