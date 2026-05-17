@@ -1,0 +1,170 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { BLOG_POSTS } from '../../data/blogPosts';
+
+export async function getStaticPaths() {
+  return BLOG_POSTS.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const title = post.title;
+const desc = post.description;
+const ogImage = post.image;
+
+const categoryColors: Record<string, string> = {
+  '保養知識': 'bg-sage-light text-sage-dark',
+  '問題改善': 'bg-gold-light text-gold-dark',
+  '服務介紹': 'bg-wood-light text-wood-dark',
+};
+
+function getRelatedPosts(currentSlug: string, category: string) {
+  return BLOG_POSTS
+    .filter(p => p.slug !== currentSlug)
+    .filter(p => p.category === category || true)
+    .slice(0, 3);
+}
+
+const related = getRelatedPosts(post.slug, post.category);
+---
+
+<Layout title={title} description={desc} ogImage={ogImage}>
+  <!-- Article Header -->
+  <div class="bg-gradient-to-br from-ivory to-cream pt-32 pb-12 border-b border-sage-light">
+    <div class="container-main max-w-3xl mx-auto px-6">
+      <div class="flex items-center gap-3 mb-6">
+        <span class={`text-xs font-medium px-3 py-1 rounded-full ${categoryColors[post.category] || 'bg-sage-light text-sage-dark'}`}>
+          {post.category}
+        </span>
+        <span class="text-xs text-text-light">{post.readTime}</span>
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold text-text-primary mb-4 leading-tight">
+        {post.title}
+      </h1>
+      <p class="text-text-secondary leading-relaxed mb-6">
+        {post.description}
+      </p>
+      <div class="flex items-center gap-4 text-sm text-text-light">
+        <div class="flex items-center gap-1.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+          <time datetime={post.date}>{post.date.replace(/-/g, '.')}</time>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+          </svg>
+          {post.keywords.slice(0, 3).join('、')}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Image -->
+  <div class="container-main max-w-3xl mx-auto px-6 -mt-0">
+    <div class="rounded-card overflow-hidden shadow-card my-8">
+      <img src={post.image} alt={post.title} class="w-full aspect-[16/9] object-cover" loading="eager" />
+    </div>
+  </div>
+
+  <!-- Article Content -->
+  <article class="container-main max-w-3xl mx-auto px-6 pb-20">
+    <div class="blog-content text-text-primary leading-[1.85] text-[1.05rem]">
+      <Fragment set:html={post.content} />
+    </div>
+
+    <!-- Tags -->
+    <div class="flex flex-wrap gap-2 mt-12 pt-8 border-t border-sage-light">
+      {post.keywords.map(kw => (
+        <span class="text-xs font-medium px-3 py-1.5 rounded-full bg-ivory text-text-secondary border border-sage-light">
+          {kw}
+        </span>
+      ))}
+    </div>
+  </article>
+
+  <!-- Related Posts -->
+  {related.length > 0 && (
+    <section class="py-16 bg-ivory border-t border-sage-light">
+      <div class="container-main max-w-3xl mx-auto px-6">
+        <h2 class="text-2xl font-bold text-text-primary mb-8">更多頭皮養護文章</h2>
+        <div class="flex flex-col gap-4">
+          {related.map(r => (
+            <a href={`/blog/${r.slug}/`} class="group flex gap-4 bg-white rounded-card p-4 shadow-card hover:shadow-card-hover transition-all">
+              <div class="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden bg-sage-light">
+                <img src={r.image} alt={r.title} class="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 mb-1">
+                  <span class={`text-[10px] font-medium px-2 py-0.5 rounded-full ${categoryColors[r.category] || ''}`}>{r.category}</span>
+                  <span class="text-[10px] text-text-light">{r.readTime}</span>
+                </div>
+                <h3 class="text-sm font-bold text-text-primary group-hover:text-sage transition-colors line-clamp-2 leading-snug">
+                  {r.title}
+                </h3>
+                <p class="text-xs text-text-secondary mt-1 line-clamp-1">{r.description}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA -->
+  <section class="py-20 text-center bg-gradient-to-br from-sage-light to-ivory">
+    <div class="container-main animate-on-scroll">
+      <h2 class="text-3xl font-bold text-text-primary mb-4">想親自體驗？</h2>
+      <p class="text-text-secondary max-w-md mx-auto mb-8">
+        每個人的頭皮狀態都不同，從專業檢測開始，找到適合自己的保養方式。
+      </p>
+      <div class="flex gap-4 justify-center flex-wrap">
+        <a href="/services/" class="inline-flex items-center bg-sage text-white rounded-pill px-8 py-3.5 font-medium hover:bg-sage-dark hover:-translate-y-0.5 transition-all shadow-cta">
+          了解服務項目
+        </a>
+        <a href="/contact/" class="inline-flex items-center border-[1.5px] border-sage text-sage rounded-pill px-8 py-3.5 font-medium hover:bg-sage hover:text-white hover:-translate-y-0.5 transition-all">
+          預約諮詢
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .blog-content h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #3D3D3D;
+      margin-top: 2.5rem;
+      margin-bottom: 1.25rem;
+      line-height: 1.4;
+    }
+    .blog-content p {
+      margin-bottom: 1.5rem;
+      color: #4a4a4a;
+    }
+    .blog-content img {
+      width: 100%;
+      border-radius: 16px;
+      margin: 2rem 0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .blog-content p + p {
+      margin-top: -0.5rem;
+    }
+    .line-clamp-1 {
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  </style>
+</Layout>
