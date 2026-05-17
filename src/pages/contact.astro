@@ -32,7 +32,7 @@ const desc = '預約 JSt.*頭皮養護中心 Scalp Care Art Center，可透過 L
               <span class="text-xs text-text-secondary">LINE QR Code</span>
             </div>
           </div>
-          <a href={BRAND.social.line} target="_blank" class="inline-flex items-center bg-line text-white rounded-pill px-6 py-2.5 font-medium hover:bg-line-dark transition-colors">
+          <a href={BRAND.social.line} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-line text-white rounded-pill px-6 py-2.5 font-medium hover:bg-line-dark transition-colors">
             加入 LINE 好友
           </a>
         </div>
@@ -57,7 +57,7 @@ const desc = '預約 JSt.*頭皮養護中心 Scalp Care Art Center，可透過 L
           </div>
           <h3 class="text-lg font-bold text-text-primary mb-2">線上表單預約</h3>
           <p class="text-sm text-text-secondary mb-5 leading-relaxed">填寫表單，我們將於 24 小時內與您確認</p>
-          <button onclick="document.getElementById('booking-form').scrollIntoView({behavior:'smooth'})" class="inline-flex items-center bg-sage text-white rounded-pill px-6 py-2.5 font-medium hover:bg-sage-dark transition-colors">
+          <button type="button" id="scrollToBooking" class="inline-flex items-center bg-sage text-white rounded-pill px-6 py-2.5 font-medium hover:bg-sage-dark transition-colors">
             填寫預約表單
           </button>
         </div>
@@ -179,11 +179,20 @@ const desc = '預約 JSt.*頭皮養護中心 Scalp Care Art Center，可透過 L
   </section>
 
   <script>
-    document.getElementById('bookingForm').addEventListener('submit', (e) => {
+    var scrollButton = document.getElementById('scrollToBooking');
+    var bookingSection = document.getElementById('booking-form');
+    if (scrollButton && bookingSection) {
+      scrollButton.addEventListener('click', function () {
+        var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        bookingSection.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      });
+    }
+
+    document.getElementById('bookingForm').addEventListener('submit', function (e) {
       e.preventDefault();
-      const form = e.target;
-      const name = form.name.value.trim();
-      const phone = form.phone.value.trim();
+      var form = e.target;
+      var name = form.name.value.trim();
+      var phone = form.phone.value.trim();
       if (!name || !phone) {
         alert('請填寫姓名與電話');
         return;

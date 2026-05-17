@@ -29,16 +29,16 @@ const categoryColors: Record<string, string> = {
   <section class="py-8 bg-cream border-b border-sage-light">
     <div class="container-main">
       <div class="flex flex-wrap gap-3 justify-center" id="categoryFilter">
-        <button data-cat="all" class="filter-btn active text-sm font-medium px-5 py-2 rounded-pill transition-all bg-sage text-white">
+        <button type="button" data-cat="all" aria-pressed="true" class="filter-btn active text-sm font-medium px-5 py-2 rounded-pill transition-all bg-sage text-white">
           全部文章
         </button>
-        <button data-cat="保養知識" class="filter-btn text-sm font-medium px-5 py-2 rounded-pill transition-all bg-white text-text-secondary border border-sage-light hover:border-sage hover:text-sage">
+        <button type="button" data-cat="保養知識" aria-pressed="false" class="filter-btn text-sm font-medium px-5 py-2 rounded-pill transition-all bg-white text-text-secondary border border-sage-light hover:border-sage hover:text-sage">
           保養知識
         </button>
-        <button data-cat="問題改善" class="filter-btn text-sm font-medium px-5 py-2 rounded-pill transition-all bg-white text-text-secondary border border-sage-light hover:border-sage hover:text-sage">
+        <button type="button" data-cat="問題改善" aria-pressed="false" class="filter-btn text-sm font-medium px-5 py-2 rounded-pill transition-all bg-white text-text-secondary border border-sage-light hover:border-sage hover:text-sage">
           問題改善
         </button>
-        <button data-cat="服務介紹" class="filter-btn text-sm font-medium px-5 py-2 rounded-pill transition-all bg-white text-text-secondary border border-sage-light hover:border-sage hover:text-sage">
+        <button type="button" data-cat="服務介紹" aria-pressed="false" class="filter-btn text-sm font-medium px-5 py-2 rounded-pill transition-all bg-white text-text-secondary border border-sage-light hover:border-sage hover:text-sage">
           服務介紹
         </button>
       </div>
@@ -97,7 +97,7 @@ const categoryColors: Record<string, string> = {
       </div>
 
       <!-- Empty State (hidden by default) -->
-      <div id="emptyState" class="hidden text-center py-20">
+      <div id="emptyState" class="text-center py-20" hidden>
         <p class="text-text-secondary">此分類暫無文章</p>
       </div>
     </div>
@@ -123,31 +123,33 @@ const categoryColors: Record<string, string> = {
 
   <script>
     // Category filter
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const cards = document.querySelectorAll('.blog-card');
-    const emptyState = document.getElementById('emptyState');
+    var filterBtns = document.querySelectorAll('.filter-btn');
+    var cards = document.querySelectorAll('.blog-card');
+    var emptyState = document.getElementById('emptyState');
 
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const cat = btn.dataset.cat;
+    filterBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var cat = btn.dataset.cat;
 
         // Update button styles
-        filterBtns.forEach(b => {
+        filterBtns.forEach(function (b) {
           b.classList.remove('bg-sage', 'text-white');
           b.classList.add('bg-white', 'text-text-secondary', 'border', 'border-sage-light');
+          b.setAttribute('aria-pressed', 'false');
         });
         btn.classList.remove('bg-white', 'text-text-secondary', 'border', 'border-sage-light');
         btn.classList.add('bg-sage', 'text-white');
+        btn.setAttribute('aria-pressed', 'true');
 
         // Filter cards
-        let visible = 0;
-        cards.forEach(card => {
-          const match = cat === 'all' || card.dataset.category === cat;
-          card.style.display = match ? '' : 'none';
+        var visible = 0;
+        cards.forEach(function (card) {
+          var match = cat === 'all' || card.dataset.category === cat;
+          card.hidden = !match;
           if (match) visible++;
         });
 
-        emptyState.style.display = visible === 0 ? 'block' : 'none';
+        emptyState.hidden = visible !== 0;
       });
     });
   </script>

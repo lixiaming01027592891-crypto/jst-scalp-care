@@ -24,7 +24,7 @@ const desc = 'JSt.*頭皮養護中心 Scalp Care Art Center 常見問題：預�
           <div class="space-y-3">
             {cat.items.map((item, ii) => (
               <div class="faq-item bg-white rounded-card shadow-sm overflow-hidden">
-                <button class="faq-question w-full flex justify-between items-center p-5 md:p-6 text-left font-medium text-text-primary hover:bg-cream/50 transition-colors" data-cat={ci} data-idx={ii}>
+                <button class="faq-question w-full flex justify-between items-center p-5 md:p-6 text-left font-medium text-text-primary hover:bg-cream/50 transition-colors" data-cat={ci} data-idx={ii} aria-expanded="false">
                   <span class="pr-4">{item.q}</span>
                   <svg class="faq-icon w-4 h-4 text-sage transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                 </button>
@@ -40,12 +40,21 @@ const desc = 'JSt.*頭皮養護中心 Scalp Care Art Center 常見問題：預�
   </section>
 
   <script>
-    document.querySelectorAll('.faq-question').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const item = btn.closest('.faq-item');
-        const wasActive = item.classList.contains('active');
-        document.querySelectorAll('.faq-item.active').forEach(el => el.classList.remove('active'));
-        if (!wasActive) item.classList.add('active');
+    document.querySelectorAll('.faq-question').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var item = btn.closest('.faq-item');
+        var wasActive = item.classList.contains('active');
+        document.querySelectorAll('.faq-item.active').forEach(function (el) {
+          el.classList.remove('active');
+          var activeButton = el.querySelector('.faq-question');
+          if (activeButton) activeButton.setAttribute('aria-expanded', 'false');
+        });
+        if (!wasActive) {
+          item.classList.add('active');
+          btn.setAttribute('aria-expanded', 'true');
+        } else {
+          btn.setAttribute('aria-expanded', 'false');
+        }
       });
     });
   </script>
@@ -59,7 +68,7 @@ const desc = 'JSt.*頭皮養護中心 Scalp Care Art Center 常見問題：預�
         <a href="/contact/" class="inline-flex items-center bg-sage text-white rounded-pill px-8 py-3.5 font-medium hover:bg-sage-dark hover:-translate-y-0.5 transition-all shadow-cta">
           聯絡我們
         </a>
-        <a href={BRAND.social.line} target="_blank" class="inline-flex items-center bg-line text-white rounded-pill px-8 py-3.5 font-medium hover:bg-line-dark hover:-translate-y-0.5 transition-all shadow-md">
+        <a href={BRAND.social.line} target="_blank" rel="noopener noreferrer" class="inline-flex items-center bg-line text-white rounded-pill px-8 py-3.5 font-medium hover:bg-line-dark hover:-translate-y-0.5 transition-all shadow-md">
           LINE 諮詢
         </a>
       </div>

@@ -48,6 +48,7 @@ const schema = {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script is:inline>document.documentElement.classList.add('js');</script>
   <title>{title}</title>
   <meta name="description" content={description} />
   <meta name="keywords" content="頭皮護理, 頭皮SPA, 新竹頭皮護理, 頭皮檢測, 深層清潔, 頭皮養護, 舒壓按摩" />
@@ -77,6 +78,7 @@ const schema = {
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/interaction-fixes.css" />
   
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#127807;</text></svg>" />
@@ -94,21 +96,33 @@ const schema = {
     <slot />
   </main>
   <Footer />
+  <script src="/interaction-fixes.js" defer></script>
   <script>
-    // Scroll animation observer (runs in browser)
-    const initAnimations = () => {
-      const els = document.querySelectorAll('.animate-on-scroll');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-      els.forEach(el => observer.observe(el));
-    };
-    document.addEventListener('DOMContentLoaded', initAnimations);
+    (function () {
+      var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var initAnimations = function () {
+        var els = Array.prototype.slice.call(document.querySelectorAll('.animate-on-scroll'));
+        if (!els.length) return;
+        if (reduceMotion || !('IntersectionObserver' in window)) {
+          els.forEach(function (el) { el.classList.add('animate-in'); });
+          return;
+        }
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('animate-in');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+        els.forEach(function (el) { observer.observe(el); });
+      };
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAnimations);
+      } else {
+        initAnimations();
+      }
+    })();
   </script>
 </body>
 </html>

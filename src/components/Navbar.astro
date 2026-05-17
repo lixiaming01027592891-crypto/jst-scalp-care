@@ -30,15 +30,6 @@ const currentPath = Astro.url.pathname;
 
   html { scroll-padding-top: 80px; scroll-behavior: smooth; }
 
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.001ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.001ms !important;
-      scroll-behavior: auto !important;
-    }
-  }
-
   #navToggle:focus-visible,
   #mobileMenu a:focus-visible {
     outline: 2px solid #A8B5A0;
@@ -71,15 +62,15 @@ const currentPath = Astro.url.pathname;
       LINE 預約
     </a>
 
-    <button class="md:hidden flex flex-col gap-[5px] p-2" id="navToggle" aria-label="選單" aria-expanded="false" aria-controls="mobileMenu">
+    <button type="button" class="md:hidden flex flex-col gap-[5px] p-2" id="navToggle" aria-label="開啟選單" aria-expanded="false" aria-controls="mobileMenu">
       <span class="block w-6 h-[2px] bg-text-primary transition-all" id="h1"></span>
       <span class="block w-6 h-[2px] bg-text-primary transition-all" id="h2"></span>
       <span class="block w-6 h-[2px] bg-text-primary transition-all" id="h3"></span>
     </button>
   </div>
 
-  <div class="md:hidden" id="mobileMenu" role="dialog" aria-modal="true" aria-label="主選單" aria-hidden="true">
-    <div class="container-main flex flex-col py-6 gap-1">
+  <div class="md:hidden" id="mobileMenu" role="dialog" aria-modal="true" aria-label="主選單" aria-hidden="true" tabindex="-1">
+    <div class="container-main flex flex-col py-6 gap-1" data-menu-panel>
       {NAV_LINKS.map(link => {
         const isActive = currentPath === link.path || currentPath === link.path.replace(/\/$/, '');
         return (
@@ -104,8 +95,18 @@ const currentPath = Astro.url.pathname;
       var nav = document.getElementById('navbar');
       var body = document.body;
       if (!toggle || !menu) return;
+      var panel = menu.querySelector('[data-menu-panel]');
 
       function isOpen() { return menu.classList.contains('is-open'); }
+      function firstMenuLink() { return menu.querySelector('a'); }
+      function focusWithoutScroll(el) {
+        if (!el || !el.focus) return;
+        try {
+          el.focus({ preventScroll: true });
+        } catch (err) {
+          el.focus();
+        }
+      }
 
       var menuFallbackStyles = {
         display: 'block',
@@ -141,10 +142,19 @@ const currentPath = Astro.url.pathname;
         }
         setMenuFallbackStyles(open);
         menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+        toggle.setAttribute('aria-label', open ? '關閉選單' : '開啟選單');
         if (h1) h1.style.transform = open ? 'rotate(45deg) translate(5px,5px)' : '';
         if (h2) h2.style.opacity = open ? '0' : '1';
         if (h3) h3.style.transform = open ? 'rotate(-45deg) translate(5px,-5px)' : '';
         toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (open) {
+          window.setTimeout(function () {
+            var link = firstMenuLink();
+            focusWithoutScroll(link);
+          }, 30);
+        } else if (document.activeElement && menu.contains(document.activeElement)) {
+          focusWithoutScroll(toggle);
+        }
       }
 
       toggle.addEventListener('click', function (e) {
@@ -153,7 +163,7 @@ const currentPath = Astro.url.pathname;
       });
 
       menu.addEventListener('click', function (e) {
-        if (e.target === menu) setMenu(false);
+        if (e.target === menu || e.target === panel) setMenu(false);
       });
 
       menu.querySelectorAll('a').forEach(function (a) {
