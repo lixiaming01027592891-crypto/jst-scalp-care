@@ -67,7 +67,7 @@ const currentPath = Astro.url.pathname;
       })}
     </div>
 
-    <a href={BRAND.social.line} target="_blank" class="hidden md:inline-flex items-center bg-line text-white rounded-pill px-5 py-2 text-sm font-medium hover:bg-line-dark transition-colors">
+    <a href={BRAND.social.line} target="_blank" rel="noopener noreferrer" class="hidden md:inline-flex items-center bg-line text-white rounded-pill px-5 py-2 text-sm font-medium hover:bg-line-dark transition-colors">
       LINE 預約
     </a>
 
@@ -78,7 +78,7 @@ const currentPath = Astro.url.pathname;
     </button>
   </div>
 
-  <div class="md:hidden" id="mobileMenu" role="dialog" aria-modal="true" aria-label="主選單">
+  <div class="md:hidden" id="mobileMenu" role="dialog" aria-modal="true" aria-label="主選單" aria-hidden="true">
     <div class="container-main flex flex-col py-6 gap-1">
       {NAV_LINKS.map(link => {
         const isActive = currentPath === link.path || currentPath === link.path.replace(/\/$/, '');
@@ -86,7 +86,7 @@ const currentPath = Astro.url.pathname;
           <a href={link.path} class={`py-3.5 text-lg font-medium border-b border-sage-light transition-colors ${isActive ? 'text-sage' : 'text-text-primary hover:text-sage'}`}>{link.label}</a>
         );
       })}
-      <a href={BRAND.social.line} target="_blank" class="mt-4 inline-flex items-center justify-center bg-line text-white rounded-pill px-5 py-3 text-base font-medium hover:bg-line-dark transition-colors">
+      <a href={BRAND.social.line} target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center justify-center bg-line text-white rounded-pill px-5 py-3 text-base font-medium hover:bg-line-dark transition-colors">
         LINE 預約
       </a>
     </div>
@@ -107,6 +107,30 @@ const currentPath = Astro.url.pathname;
 
       function isOpen() { return menu.classList.contains('is-open'); }
 
+      var menuFallbackStyles = {
+        display: 'block',
+        position: 'fixed',
+        top: '72px',
+        left: '0',
+        right: '0',
+        bottom: '0',
+        'z-index': '60',
+        'overflow-y': 'auto',
+        background: 'rgba(255, 255, 255, 0.98)',
+        '-webkit-backdrop-filter': 'blur(16px)',
+        'backdrop-filter': 'blur(16px)'
+      };
+
+      function setMenuFallbackStyles(open) {
+        Object.keys(menuFallbackStyles).forEach(function (property) {
+          if (open) {
+            menu.style.setProperty(property, menuFallbackStyles[property], 'important');
+          } else {
+            menu.style.removeProperty(property);
+          }
+        });
+      }
+
       function setMenu(open) {
         if (open) {
           menu.classList.add('is-open');
@@ -115,6 +139,8 @@ const currentPath = Astro.url.pathname;
           menu.classList.remove('is-open');
           body.classList.remove('menu-open');
         }
+        setMenuFallbackStyles(open);
+        menu.setAttribute('aria-hidden', open ? 'false' : 'true');
         if (h1) h1.style.transform = open ? 'rotate(45deg) translate(5px,5px)' : '';
         if (h2) h2.style.opacity = open ? '0' : '1';
         if (h3) h3.style.transform = open ? 'rotate(-45deg) translate(5px,-5px)' : '';
