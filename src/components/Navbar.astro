@@ -53,38 +53,46 @@ const currentPath = Astro.url.pathname;
   </div>
 </nav>
 
-<script>
-  const toggle = document.getElementById('navToggle');
-  const menu = document.getElementById('mobileMenu');
-  const h1 = document.getElementById('h1');
-  const h2 = document.getElementById('h2');
-  const h3 = document.getElementById('h3');
-  const nav = document.getElementById('navbar');
-  
-  if (toggle && menu) {
-    let open = false;
-    toggle.addEventListener('click', () => {
-      open = !open;
-      menu.classList.toggle('opacity-0', !open);
-      menu.classList.toggle('pointer-events-none', !open);
-      menu.classList.toggle('opacity-100', open);
-      menu.classList.toggle('pointer-events-auto', open);
-      h1.style.transform = open ? 'rotate(45deg) translate(5px,5px)' : '';
-      h2.style.opacity = open ? '0' : '1';
-      h3.style.transform = open ? 'rotate(-45deg) translate(5px,-5px)' : '';
-    });
-    
-    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      open = false;
-      menu.classList.add('opacity-0', 'pointer-events-none');
-      menu.classList.remove('opacity-100', 'pointer-events-auto');
-      h1.style.transform = '';
-      h2.style.opacity = '1';
-      h3.style.transform = '';
-    }));
-  }
-  
-  window.addEventListener('scroll', () => {
-    if (nav) nav.style.boxShadow = window.scrollY > 50 ? '0 2px 12px rgba(0,0,0,0.08)' : '0 1px 0 rgba(0,0,0,0.05)';
-  });
+<script is:inline>
+  (function () {
+    function init() {
+      var toggle = document.getElementById('navToggle');
+      var menu = document.getElementById('mobileMenu');
+      var h1 = document.getElementById('h1');
+      var h2 = document.getElementById('h2');
+      var h3 = document.getElementById('h3');
+      var nav = document.getElementById('navbar');
+      if (!toggle || !menu) return;
+
+      var open = false;
+      function setMenu(o) {
+        open = o;
+        if (o) {
+          menu.style.cssText = 'display:block !important;position:fixed;top:72px;left:0;right:0;bottom:0;background:rgba(255,255,255,0.98);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:60;overflow-y:auto;opacity:1;pointer-events:auto;transition:opacity 300ms;';
+        } else {
+          menu.style.cssText = 'display:none !important;';
+        }
+        if (h1) h1.style.transform = o ? 'rotate(45deg) translate(5px,5px)' : '';
+        if (h2) h2.style.opacity = o ? '0' : '1';
+        if (h3) h3.style.transform = o ? 'rotate(-45deg) translate(5px,-5px)' : '';
+        toggle.setAttribute('aria-expanded', o ? 'true' : 'false');
+      }
+
+      toggle.addEventListener('click', function (e) { e.preventDefault(); setMenu(!open); });
+      menu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { setMenu(false); });
+      });
+
+      if (nav) {
+        window.addEventListener('scroll', function () {
+          nav.style.boxShadow = window.scrollY > 50 ? '0 2px 12px rgba(0,0,0,0.08)' : '0 1px 0 rgba(0,0,0,0.05)';
+        }, { passive: true });
+      }
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
 </script>
