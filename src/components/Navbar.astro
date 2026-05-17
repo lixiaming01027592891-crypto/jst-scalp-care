@@ -37,8 +37,8 @@ const currentPath = Astro.url.pathname;
     </button>
   </div>
   
-  <!-- Mobile menu -->
-  <div class="hidden md:hidden fixed top-[72px] left-0 right-0 bottom-0 bg-white/98 backdrop-blur-lg z-[60] overflow-y-auto" id="mobileMenu">
+  <!-- Mobile menu overlay -->
+  <div class="md:hidden fixed top-[72px] left-0 right-0 bottom-0 bg-white/98 backdrop-blur-lg z-[60] overflow-y-auto opacity-0 pointer-events-none transition-opacity duration-300" id="mobileMenu">
     <div class="container-main flex flex-col py-6 gap-1">
       {NAV_LINKS.map(link => {
         const isActive = currentPath === link.path || currentPath === link.path.replace(/\/$/, '');
@@ -65,7 +65,10 @@ const currentPath = Astro.url.pathname;
     let open = false;
     toggle.addEventListener('click', () => {
       open = !open;
-      menu.classList.toggle('hidden', !open);
+      menu.classList.toggle('opacity-0', !open);
+      menu.classList.toggle('pointer-events-none', !open);
+      menu.classList.toggle('opacity-100', open);
+      menu.classList.toggle('pointer-events-auto', open);
       h1.style.transform = open ? 'rotate(45deg) translate(5px,5px)' : '';
       h2.style.opacity = open ? '0' : '1';
       h3.style.transform = open ? 'rotate(-45deg) translate(5px,-5px)' : '';
@@ -73,7 +76,8 @@ const currentPath = Astro.url.pathname;
     
     menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
       open = false;
-      menu.classList.add('hidden');
+      menu.classList.add('opacity-0', 'pointer-events-none');
+      menu.classList.remove('opacity-100', 'pointer-events-auto');
       h1.style.transform = '';
       h2.style.opacity = '1';
       h3.style.transform = '';
