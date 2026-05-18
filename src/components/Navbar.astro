@@ -66,21 +66,21 @@ const currentPath = Astro.url.pathname;
       <span class="block w-6 h-[2px] bg-text-primary transition-all" id="h3"></span>
     </button>
   </div>
-
-  <div class="md:hidden" id="mobileMenu" role="dialog" aria-modal="true" aria-label="主選單">
-    <div class="container-main flex flex-col py-6 gap-1">
-      {NAV_LINKS.map(link => {
-        const isActive = currentPath === link.path || currentPath === link.path.replace(/\/$/, '');
-        return (
-          <a href={link.path} class={`py-3.5 text-lg font-medium border-b border-sage-light transition-colors ${isActive ? 'text-sage' : 'text-text-primary hover:text-sage'}`}>{link.label}</a>
-        );
-      })}
-      <a href={BRAND.social.line} target="_blank" class="mt-4 inline-flex items-center justify-center bg-line text-white rounded-pill px-5 py-3 text-base font-medium hover:bg-line-dark transition-colors">
-        LINE 預約
-      </a>
-    </div>
-  </div>
 </nav>
+
+<div class="md:hidden" id="mobileMenu" role="dialog" aria-modal="true" aria-label="主選單">
+  <div class="container-main flex flex-col py-6 gap-1">
+    {NAV_LINKS.map(link => {
+      const isActive = currentPath === link.path || currentPath === link.path.replace(/\/$/, '');
+      return (
+        <a href={link.path} class={`py-3.5 text-lg font-medium border-b border-sage-light transition-colors ${isActive ? 'text-sage' : 'text-text-primary hover:text-sage'}`}>{link.label}</a>
+      );
+    })}
+    <a href={BRAND.social.line} target="_blank" class="mt-4 inline-flex items-center justify-center bg-line text-white rounded-pill px-5 py-3 text-base font-medium hover:bg-line-dark transition-colors">
+      LINE 預約
+    </a>
+  </div>
+</div>
 
 <script is:inline>
   (function () {
