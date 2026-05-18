@@ -68,6 +68,32 @@ const currentPath = Astro.url.pathname;
   </div>
 </nav>
 
+{/*
+  ⚠️⚠️⚠️  DO NOT MOVE #mobileMenu BACK INSIDE <nav>  ⚠️⚠️⚠️
+
+  <nav id="navbar"> has `backdrop-blur-md` (CSS `backdrop-filter: blur(12px)`).
+  Per CSS spec, any ancestor with backdrop-filter / transform / filter /
+  perspective becomes the containing block for its position:fixed descendants.
+
+  #mobileMenu uses `position:fixed; top:72px; bottom:0`:
+    - As <nav>'s SIBLING (current)  -> containing block = viewport -> fills
+                                       72px-to-bottom correctly. OK
+    - As <nav>'s CHILD              -> containing block = 72px-tall nav box
+                                       -> height collapses to 0, invisible.
+
+  Hamburger -> X transform still works either way (h1/h3 span transforms
+  don't depend on containing block), which masks the bug — menu LOOKS open
+  in the DOM, displays nothing on screen. JSDOM and Chrome DevTools mobile
+  emulation may not reproduce; only real mobile devices show the failure.
+
+  This bug took 4 fix rounds (v1 class-toggle, v2 cssText, v3 setProperty
+  fallback, v4 cssText with explicit top/bottom) before the structural cause
+  was found in commit 1ac140b. Do not undo by re-nesting.
+
+  Allowed: edit styles, classes of inner links, animation params, JS logic.
+  Forbidden: move this div into <nav>, remove backdrop-blur-md from <nav>,
+             rename #mobileMenu / #navToggle / #h1 / #h2 / #h3.
+*/}
 <div class="md:hidden" id="mobileMenu" role="dialog" aria-modal="true" aria-label="主選單">
   <div class="container-main flex flex-col py-6 gap-1">
     {NAV_LINKS.map(link => {
