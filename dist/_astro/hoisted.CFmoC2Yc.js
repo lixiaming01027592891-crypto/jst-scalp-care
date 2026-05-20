@@ -1,1 +1,0 @@
-const s=()=>{const o=document.querySelectorAll(".animate-on-scroll"),n=new IntersectionObserver(e=>{e.forEach(t=>{t.isIntersecting&&(t.target.classList.add("animate-in"),n.unobserve(t.target))})},{threshold:.1,rootMargin:"0px 0px -30px 0px"});o.forEach(e=>n.observe(e))};document.addEventListener("DOMContentLoaded",s);
