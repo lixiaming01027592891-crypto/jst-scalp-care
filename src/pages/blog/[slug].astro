@@ -1,18 +1,19 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { BLOG_POSTS } from '../../data/blogPosts';
+import { getCollection, type CollectionEntry } from 'astro:content';
 
 export async function getStaticPaths() {
-  return BLOG_POSTS.map(post => ({
-    params: { slug: post.slug },
-    props: { post },
+  const posts = await getCollection('blog');
+  return posts.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
   }));
 }
 
-const { post } = Astro.props;
-const title = post.title;
-const desc = post.description;
-const ogImage = post.image;
+type Props = { entry: CollectionEntry<'blog'> };
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const { title, description, date, category, readTime, keywords, image } = entry.data;
 
 const categoryColors: Record<string, string> = {
   '保養知識': 'bg-sage-light text-sage-dark',
@@ -20,44 +21,45 @@ const categoryColors: Record<string, string> = {
   '服務介紹': 'bg-wood-light text-wood-dark',
 };
 
+const allPosts = await getCollection('blog');
 function getRelatedPosts(currentSlug: string, category: string) {
-  return BLOG_POSTS
+  return allPosts
     .filter(p => p.slug !== currentSlug)
-    .filter(p => p.category === category || true)
+    .filter(p => p.data.category === category || true)
     .slice(0, 3);
 }
 
-const related = getRelatedPosts(post.slug, post.category);
+const related = getRelatedPosts(entry.slug, category);
 ---
 
-<Layout title={title} description={desc} ogImage={ogImage}>
+<Layout title={title} description={description} ogImage={image}>
   <!-- Article Header -->
   <div class="bg-gradient-to-br from-ivory to-cream pt-32 pb-12 border-b border-sage-light">
     <div class="container-main max-w-3xl mx-auto px-6">
       <div class="flex items-center gap-3 mb-6">
-        <span class={`text-xs font-medium px-3 py-1 rounded-full ${categoryColors[post.category] || 'bg-sage-light text-sage-dark'}`}>
-          {post.category}
+        <span class={`text-xs font-medium px-3 py-1 rounded-full ${categoryColors[category] || 'bg-sage-light text-sage-dark'}`}>
+          {category}
         </span>
-        <span class="text-xs text-text-light">{post.readTime}</span>
+        <span class="text-xs text-text-light">{readTime}</span>
       </div>
       <h1 class="text-3xl md:text-4xl font-bold text-text-primary mb-4 leading-tight">
-        {post.title}
+        {title}
       </h1>
       <p class="text-text-secondary leading-relaxed mb-6">
-        {post.description}
+        {description}
       </p>
       <div class="flex items-center gap-4 text-sm text-text-light">
         <div class="flex items-center gap-1.5">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
           </svg>
-          <time datetime={post.date}>{post.date.replace(/-/g, '.')}</time>
+          <time datetime={date}>{date.replace(/-/g, '.')}</time>
         </div>
         <div class="flex items-center gap-1.5">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
           </svg>
-          {post.keywords.slice(0, 3).join('、')}
+          {keywords.slice(0, 3).join('、')}
         </div>
       </div>
     </div>
@@ -66,19 +68,19 @@ const related = getRelatedPosts(post.slug, post.category);
   <!-- Hero Image -->
   <div class="container-main max-w-3xl mx-auto px-6 -mt-0">
     <div class="rounded-card overflow-hidden shadow-card my-8">
-      <img src={post.image} alt={post.title} class="w-full aspect-[16/9] object-cover" loading="eager" />
+      <img src={image} alt={title} class="w-full aspect-[16/9] object-cover" loading="eager" />
     </div>
   </div>
 
   <!-- Article Content -->
   <article class="container-main max-w-3xl mx-auto px-6 pb-20">
     <div class="blog-content text-text-primary leading-[1.85] text-[1.05rem]">
-      <Fragment set:html={post.content} />
+      <Content />
     </div>
 
     <!-- Tags -->
     <div class="flex flex-wrap gap-2 mt-12 pt-8 border-t border-sage-light">
-      {post.keywords.map(kw => (
+      {keywords.map(kw => (
         <span class="text-xs font-medium px-3 py-1.5 rounded-full bg-ivory text-text-secondary border border-sage-light">
           {kw}
         </span>
@@ -95,17 +97,17 @@ const related = getRelatedPosts(post.slug, post.category);
           {related.map(r => (
             <a href={`/blog/${r.slug}/`} class="group flex gap-4 bg-white rounded-card p-4 shadow-card hover:shadow-card-hover transition-all">
               <div class="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden bg-sage-light">
-                <img src={r.image} alt={r.title} class="w-full h-full object-cover" loading="lazy" />
+                <img src={r.data.image} alt={r.data.title} class="w-full h-full object-cover" loading="lazy" />
               </div>
               <div class="flex-1 min-w-0">
                 <div class="flex items-center gap-2 mb-1">
-                  <span class={`text-[10px] font-medium px-2 py-0.5 rounded-full ${categoryColors[r.category] || ''}`}>{r.category}</span>
-                  <span class="text-[10px] text-text-light">{r.readTime}</span>
+                  <span class={`text-[10px] font-medium px-2 py-0.5 rounded-full ${categoryColors[r.data.category] || ''}`}>{r.data.category}</span>
+                  <span class="text-[10px] text-text-light">{r.data.readTime}</span>
                 </div>
                 <h3 class="text-sm font-bold text-text-primary group-hover:text-sage transition-colors line-clamp-2 leading-snug">
-                  {r.title}
+                  {r.data.title}
                 </h3>
-                <p class="text-xs text-text-secondary mt-1 line-clamp-1">{r.description}</p>
+                <p class="text-xs text-text-secondary mt-1 line-clamp-1">{r.data.description}</p>
               </div>
             </a>
           ))}
