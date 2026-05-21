@@ -1,0 +1,1 @@
+import"./hoisted.B--Ksf40.js";document.getElementById("bookingForm").addEventListener("submit",t=>{t.preventDefault();const e=t.target,n=e.name.value.trim(),r=e.phone.value.trim();if(!n||!r){alert("請填寫姓名與電話");return}alert("感謝您的預約！我們將於 24 小時內與您聯繫確認。"),e.reset()});
