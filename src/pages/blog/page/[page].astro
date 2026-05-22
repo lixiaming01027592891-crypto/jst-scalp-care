@@ -1,20 +1,40 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import BlogList from '../components/BlogList.astro';
-import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import BlogList from '../../../components/BlogList.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
 
-const PAGE_SIZE = 9;
+export async function getStaticPaths() {
+  const PAGE_SIZE = 9;
+  const posts = await getCollection('blog');
+  const sorted = posts.sort((a, b) =>
+    new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  );
+  const totalPages = Math.max(1, Math.ceil(sorted.length / PAGE_SIZE));
 
-const posts = await getCollection('blog');
-const sorted = posts.sort((a, b) =>
-  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
-);
+  const paths = [];
+  for (let p = 2; p <= totalPages; p++) {
+    paths.push({
+      params: { page: String(p) },
+      props: {
+        posts: sorted.slice((p - 1) * PAGE_SIZE, p * PAGE_SIZE),
+        currentPage: p,
+        totalPages,
+      },
+    });
+  }
+  return paths;
+}
 
-const totalPages = Math.max(1, Math.ceil(sorted.length / PAGE_SIZE));
-const pagePosts = sorted.slice(0, PAGE_SIZE);
+type Props = {
+  posts: CollectionEntry<'blog'>[];
+  currentPage: number;
+  totalPages: number;
+};
 
-const title = '頭皮養護知識｜新竹頭皮保養與頭皮護理文章｜JSt.*頭皮養護中心';
-const desc = '新竹頭皮保養與頭皮護理知識文章，涵蓋頭皮SPA、頭皮檢測、日常養護、出油改善、頭皮屑處理等實用內容。了解頭皮健康知識，找到適合自己的保養方式。';
+const { posts, currentPage, totalPages } = Astro.props;
+
+const title = `頭皮養護知識 第 ${currentPage} 頁｜新竹頭皮保養與頭皮護理文章｜JSt.*頭皮養護中心`;
+const desc = `新竹頭皮保養與頭皮護理文章列表第 ${currentPage} 頁。涵蓋頭皮SPA、頭皮檢測、日常養護、出油改善、頭皮屑處理等實用內容。`;
 ---
 
 <Layout title={title} description={desc} ogImage="/images/scalp-illust.jpg">
@@ -25,10 +45,11 @@ const desc = '新竹頭皮保養與頭皮護理知識文章，涵蓋頭皮SPA、
         從日常保養到專業護理，給你實用的<span class="text-sage font-medium">新竹頭皮保養</span>與<span class="text-sage font-medium">新竹頭皮護理</span>知識。<br class="hidden md:block" />
         了解頭皮健康，找到適合自己的<span class="text-sage font-medium">新竹頭皮養護</span>方式。
       </p>
+      <p class="text-sm text-text-light mt-4">第 {currentPage} 頁 / 共 {totalPages} 頁</p>
     </div>
   </div>
 
-  <BlogList posts={pagePosts} currentPage={1} totalPages={totalPages} />
+  <BlogList posts={posts} currentPage={currentPage} totalPages={totalPages} />
 
   <section class="py-20 text-center bg-gradient-to-br from-sage-light to-ivory">
     <div class="container-main animate-on-scroll">
