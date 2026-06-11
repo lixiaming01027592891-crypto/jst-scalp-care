@@ -1,6 +1,7 @@
 ---
 import { BRAND, NAV_LINKS } from '../data/siteData';
 const links = NAV_LINKS;
+const year = new Date().getFullYear();
 ---
 
 <footer class="bg-ivory border-t border-sage-light pt-16 pb-6">
@@ -62,6 +63,6 @@ const links = NAV_LINKS;
   </div>
   
   <div class="container-main border-t border-sage-light mt-10 pt-6 text-center text-xs text-text-light">
-    &copy; 2025 {BRAND.name}. All rights reserved.
+    &copy; {year} {BRAND.name}. All rights reserved.
   </div>
 </footer>

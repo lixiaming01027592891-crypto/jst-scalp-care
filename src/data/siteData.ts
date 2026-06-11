@@ -8,81 +8,6 @@ export const NAV_LINKS = [
   { label: '預約聯絡', path: '/contact/' },
 ];
 
-export const BLOG_POSTS = [
-  {
-    slug: 'scalp-care-frequency',
-    title: '頭皮護理多久做一次？找到適合自己的保養頻率',
-    description: '頭皮護理不是越頻繁越好。了解自己的頭皮類型與生活習慣，才能找到最適合的保養間隔，讓每一次護理都發揮最大效果。',
-    date: '2026-04-15',
-    category: '保養知識',
-    readTime: '5 分鐘',
-    keywords: ['頭皮護理頻率', '多久做一次', '保養間隔'],
-  },
-  {
-    slug: 'oily-scalp-solutions',
-    title: '頭皮出油怎麼辦？從成因到日常改善完整指南',
-    description: '下午就開始頭皮出油、髮根扁塌？了解頭皮出油的真正原因，從洗髮習慣到飲食調整，給你實用的日常改善建議。',
-    date: '2026-04-08',
-    category: '問題改善',
-    readTime: '6 分鐘',
-    keywords: ['頭皮出油', '油性頭皮', '頭皮護理'],
-  },
-  {
-    slug: 'scalp-detection-guide',
-    title: '頭皮檢測是什麼？專業檢測流程與注意事項',
-    description: '第一次做頭皮檢測會緊張嗎？帶你了解完整的檢測流程，從諮詢到儀器分析，讓你安心認識自己的頭皮狀態。',
-    date: '2026-03-28',
-    category: '服務介紹',
-    readTime: '4 分鐘',
-    keywords: ['頭皮檢測', '頭皮分析', '新竹頭皮護理'],
-  },
-  {
-    slug: 'dandruff-causes-treatment',
-    title: '頭皮屑分成幾種？不同類型的成因與保養方式',
-    description: '頭皮屑不是單一問題。乾性屑與油性屑的成因與處理方式完全不同，認識自己的頭皮屑類型，才能對症保養。',
-    date: '2026-03-20',
-    category: '問題改善',
-    readTime: '5 分鐘',
-    keywords: ['頭皮屑', '去屑', '頭皮保養'],
-  },
-  {
-    slug: 'scalp-spa-benefits',
-    title: '頭皮SPA不只是洗頭：精油按摩與舒壓療癒',
-    description: '頭皮SPA結合精油按摩與頸肩舒壓，不只是清潔頭皮，更是一場從頭開始的身心放鬆體驗。了解頭皮SPA的完整內容與適合對象。',
-    date: '2026-03-12',
-    category: '服務介紹',
-    readTime: '5 分鐘',
-    keywords: ['頭皮SPA', '精油按摩', '舒壓'],
-  },
-  {
-    slug: 'daily-scalp-care-tips',
-    title: '居家頭皮保養六要點：日常習慣決定頭皮健康',
-    description: '專業護理之外，日常習慣才是維持頭皮健康的關鍵。六個簡單易做的居家保養要點，讓你在生活中也能守護頭皮。',
-    date: '2026-03-05',
-    category: '保養知識',
-    readTime: '4 分鐘',
-    keywords: ['頭皮保養', '居家護理', '日常習慣'],
-  },
-  {
-    slug: 'seasonal-hair-loss',
-    title: '換季掉髮怎麼辦？季節轉換時的頭皮養護重點',
-    description: '春秋季節交替時，許多人會發現掉髮量增加。了解換季掉髮的原因，以及這個時期特別需要注意的頭皮養護重點。',
-    date: '2026-02-25',
-    category: '保養知識',
-    readTime: '5 分鐘',
-    keywords: ['換季掉髮', '頭皮養護', '季節保養'],
-  },
-  {
-    slug: 'first-time-scalp-care',
-    title: '第一次做頭皮護理：新客須知與療程準備',
-    description: '第一次來JSt.*做頭皮護理會發生什麼事？從預約到療程結束的完整流程說明，讓你第一次就安心享受。',
-    date: '2026-02-18',
-    category: '服務介紹',
-    readTime: '4 分鐘',
-    keywords: ['第一次', '頭皮護理', '新客'],
-  },
-];
-
 export const BRAND = {
   name: 'JSt.*頭皮養護中心',
   tagline: '讓頭皮，回到最舒適的狀態',
@@ -101,7 +26,7 @@ export const BRAND = {
     facebook: 'https://www.facebook.com/jst.scalpcare',
     instagram: 'https://www.instagram.com/jst.scalpcare',
   },
-  ogImage: 'images/hero-bg.jpg',
+  ogImage: '/images/hero-bg.jpg',
   url: 'https://jstscalpcare.com/',
 };
 

@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
+import { BRAND } from '../../data/siteData';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -23,16 +24,35 @@ const categoryColors: Record<string, string> = {
 
 const allPosts = await getCollection('blog');
 function getRelatedPosts(currentSlug: string, category: string) {
-  return allPosts
-    .filter(p => p.slug !== currentSlug)
-    .filter(p => p.data.category === category || true)
-    .slice(0, 3);
+  const others = allPosts.filter(p => p.slug !== currentSlug);
+  // 同分類優先，不足 3 篇再用其他分類補滿
+  const sameCategory = others.filter(p => p.data.category === category);
+  const rest = others.filter(p => p.data.category !== category);
+  return [...sameCategory, ...rest].slice(0, 3);
 }
 
 const related = getRelatedPosts(entry.slug, category);
+
+const articleUrl = new URL(`/blog/${entry.slug}/`, BRAND.url).toString();
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": title,
+  "description": description,
+  "image": new URL(image, BRAND.url).toString(),
+  "datePublished": date,
+  "dateModified": date,
+  "keywords": keywords.join(', '),
+  "articleSection": category,
+  "inLanguage": "zh-TW",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": articleUrl },
+  "author": { "@type": "Organization", "name": BRAND.name, "url": BRAND.url },
+  "publisher": { "@type": "Organization", "name": BRAND.name, "url": BRAND.url },
+};
 ---
 
 <Layout title={title} description={description} ogImage={image}>
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} is:inline />
   <!-- Article Header -->
   <div class="bg-gradient-to-br from-ivory to-cream pt-32 pb-12 border-b border-sage-light">
     <div class="container-main max-w-3xl mx-auto px-6">

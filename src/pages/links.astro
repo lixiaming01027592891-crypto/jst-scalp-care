@@ -3,7 +3,7 @@ const title = 'JSt.*頭皮養護中心 | 官方連結';
 const desc = 'JSt.*頭皮養護中心 Scalp Care Art Center 官方連結頁面 - 官網、LINE預約、Facebook、Instagram、蝦皮拍賣、電話聯絡';
 
 const links = [
-  { label: '官方網站', url: 'https://jst-scalp-care.pages.dev', icon: 'globe', color: 'bg-sage hover:bg-sage-dark' },
+  { label: '官方網站', url: 'https://jstscalpcare.com', icon: 'globe', color: 'bg-sage hover:bg-sage-dark' },
   { label: 'LINE 預約諮詢', url: 'https://lin.ee/your-line-id', icon: 'line', color: 'bg-[#06C755] hover:bg-[#04a348]' },
   { label: 'Facebook 粉絲專頁', url: 'https://www.facebook.com/share/14iCfkqjqtS/?mibextid=wwXIfr', icon: 'facebook', color: 'bg-[#1877F2] hover:bg-[#1464c0]' },
   { label: 'Instagram (@jst_coming)', url: 'https://www.instagram.com/jst_coming', icon: 'instagram', color: 'bg-gradient-to-r from-[#f58529] via-[#dd2a7b] to-[#8134af]' },
@@ -12,6 +12,8 @@ const links = [
   { label: '蝦皮拍賣賣場', url: 'https://shopee.tw/jstscalpcare', icon: 'shop', color: 'bg-[#EE4D2D] hover:bg-[#d03515]' },
   { label: '電話預約', url: 'tel:03528XXXX', icon: 'phone', color: 'bg-sage hover:bg-sage-dark' },
 ];
+
+const year = new Date().getFullYear();
 ---
 
 <!doctype html>
@@ -23,7 +25,14 @@ const links = [
   <meta name="description" content={desc} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={desc} />
-  <meta property="og:image" content="https://jst-scalp-care.pages.dev/images/hero-bg.jpg" />
+  <meta property="og:image" content="https://jstscalpcare.com/images/hero-bg.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jstscalpcare.com/links/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={desc} />
+  <meta name="twitter:image" content="https://jstscalpcare.com/images/hero-bg.jpg" />
+  <link rel="canonical" href="https://jstscalpcare.com/links/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet" />
   <style is:global>
@@ -97,7 +106,7 @@ const links = [
   </div>
 
   <div class="footer">
-    © 2025 JSt.*頭皮養護中心 Scalp Care Art Center<br />
+    © {year} JSt.*頭皮養護中心 Scalp Care Art Center<br />
     新竹市東區光復路一段 XXX 號
   </div>
 </body>
