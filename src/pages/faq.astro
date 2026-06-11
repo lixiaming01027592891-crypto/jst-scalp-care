@@ -54,6 +54,7 @@ const faqSchema = {
     document.querySelectorAll('.faq-question').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var item = btn.closest('.faq-item');
+        if (!item) return;
         var wasActive = item.classList.contains('active');
         document.querySelectorAll('.faq-item.active').forEach(function (el) {
           el.classList.remove('active');

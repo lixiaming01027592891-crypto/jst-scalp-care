@@ -128,8 +128,8 @@ const pageNumbers = Array.from({ length: totalPages }, (_, idx) => idx + 1);
 </section>
 
 <script>
-  var filterBtns = document.querySelectorAll('.filter-btn');
-  var cards = document.querySelectorAll('.blog-card');
+  var filterBtns = document.querySelectorAll<HTMLElement>('.filter-btn');
+  var cards = document.querySelectorAll<HTMLElement>('.blog-card');
   var emptyState = document.getElementById('emptyState');
 
   filterBtns.forEach(function (btn) {

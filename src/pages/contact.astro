@@ -138,7 +138,7 @@ const desc = '預約 JSt.*頭皮養護中心 Scalp Care Art Center，可透過 L
           <div class="grid sm:grid-cols-2 gap-5">
             <div>
               <label class="block text-sm font-medium text-text-primary mb-1">預約項目</label>
-              <select name="service" class="w-full px-4 py-3 border-[1.5px] border-sage-light rounded-[10px] bg-white text-text-primary focus:border-sage outline-none appearance-none" style="background-image:url('data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\" viewBox=\"0 0 12 12\"%3E%3Cpath fill=\"%236B6B6B\" d=\"M6 8L1 3h10z\"/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 1rem center;">
+              <select name="service" class="w-full px-4 py-3 border-[1.5px] border-sage-light rounded-[10px] bg-white text-text-primary focus:border-sage outline-none appearance-none" style="background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 12 12%22%3E%3Cpath fill=%22%236B6B6B%22 d=%22M6 8L1 3h10z%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 1rem center;">
                 <option>想先諮詢</option>
                 <option>頭皮檢測</option>
                 <option>深層清潔</option>
@@ -154,7 +154,7 @@ const desc = '預約 JSt.*頭皮養護中心 Scalp Care Art Center，可透過 L
           </div>
           <div>
             <label class="block text-sm font-medium text-text-primary mb-1">期望時段</label>
-            <select name="time" class="w-full px-4 py-3 border-[1.5px] border-sage-light rounded-[10px] bg-white text-text-primary focus:border-sage outline-none appearance-none" style="background-image:url('data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\" viewBox=\"0 0 12 12\"%3E%3Cpath fill=\"%236B6B6B\" d=\"M6 8L1 3h10z\"/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 1rem center;">
+            <select name="time" class="w-full px-4 py-3 border-[1.5px] border-sage-light rounded-[10px] bg-white text-text-primary focus:border-sage outline-none appearance-none" style="background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 12 12%22%3E%3Cpath fill=%22%236B6B6B%22 d=%22M6 8L1 3h10z%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 1rem center;">
               <option>10:00 - 12:00</option>
               <option>12:00 - 14:00</option>
               <option>14:00 - 16:00</option>
@@ -182,24 +182,28 @@ const desc = '預約 JSt.*頭皮養護中心 Scalp Care Art Center，可透過 L
     var scrollButton = document.getElementById('scrollToBooking');
     var bookingSection = document.getElementById('booking-form');
     if (scrollButton && bookingSection) {
+      var target = bookingSection;
       scrollButton.addEventListener('click', function () {
         var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        bookingSection.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+        target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
       });
     }
 
-    document.getElementById('bookingForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      var form = e.target;
-      var name = form.name.value.trim();
-      var phone = form.phone.value.trim();
-      if (!name || !phone) {
-        alert('請填寫姓名與電話');
-        return;
-      }
-      alert('感謝您的預約！我們將於 24 小時內與您聯繫確認。');
-      form.reset();
-    });
+    var bookingForm = document.getElementById('bookingForm');
+    if (bookingForm) {
+      bookingForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var form = e.currentTarget as HTMLFormElement;
+        var name = (form.elements.namedItem('name') as HTMLInputElement).value.trim();
+        var phone = (form.elements.namedItem('phone') as HTMLInputElement).value.trim();
+        if (!name || !phone) {
+          alert('請填寫姓名與電話');
+          return;
+        }
+        alert('感謝您的預約！我們將於 24 小時內與您聯繫確認。');
+        form.reset();
+      });
+    }
   </script>
 
   <!-- Mini CTA -->
