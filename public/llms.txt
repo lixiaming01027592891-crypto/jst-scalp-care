@@ -1,0 +1,26 @@
+# JSt.* 頭皮養護中心
+
+> 新竹頭皮養護中心，提供頭皮深層清潔、頭皮養護與護髮服務。屬美容保養，非醫療行為。
+
+## 商家資訊
+- 業務類型：頭皮養護／護髮
+- 服務地區：新竹
+- 營業時間：週二至週六 10:00–20:00；週日 10:00–18:00
+- 官方網站：https://jstscalpcare.com
+
+## 服務項目
+- 頭皮深層清潔
+- 頭皮養護
+- 護髮
+- 頭皮檢測諮詢
+
+## 主要頁面
+- [服務項目](https://jstscalpcare.com/services/): 養護服務介紹
+- [頭皮養護](https://jstscalpcare.com/scalp-care/): 療程流程
+- [價目表](https://jstscalpcare.com/pricing/): 服務價目
+- [常見問題](https://jstscalpcare.com/faq/): 常見問題與免責說明
+- [養護知識](https://jstscalpcare.com/blog/): 頭皮保養文章
+- [聯絡我們](https://jstscalpcare.com/contact/): 預約諮詢
+
+## 備註
+本中心為美容保養服務，非醫療機構，不提供醫療診斷或療效保證；相關健康問題建議諮詢皮膚科醫師。
