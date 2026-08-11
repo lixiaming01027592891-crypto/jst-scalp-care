@@ -46,7 +46,7 @@ export const PRICING = [
 ];
 
 export const ADDONS = [
-  { name: '頭皮檢測單次', price: 300 },
+  { name: '頭皮檢測單次', price: 600 },
   { name: '精華導入加強', price: 500 },
   { name: '頸肩熱敷舒壓', price: 400 },
   { name: '居家養護洗髮組', price: 1200 },
