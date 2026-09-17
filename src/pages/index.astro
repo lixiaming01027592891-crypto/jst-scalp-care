@@ -4,7 +4,7 @@ import FloatingContact from '../components/FloatingContact.astro';
 import { BRAND, SERVICES, STEPS } from '../data/siteData';
 
 const title = `${BRAND.name} | Scalp Care Art Center`;
-const desc = `${BRAND.description}。提供專業頭皮檢測、深層清潔、頭皮SPA、頭皮養護等服務。LINE預約、電話 ${BRAND.phone}。`;
+const desc = `${BRAND.description}。提供專業頭皮檢測、深層清潔、頭皮SPA、頭皮養護等服務。Facebook 私訊預約、電話 ${BRAND.phone}。`;
 ---
 
 <Layout title={title} description={desc}>
@@ -125,9 +125,9 @@ const desc = `${BRAND.description}。提供專業頭皮檢測、深層清潔、�
       <h2 class="text-3xl md:text-4xl font-bold text-text-primary mb-4">準備好給頭皮一場放鬆之旅了嗎？</h2>
       <p class="text-text-secondary max-w-md mx-auto mb-8">首次體驗即贈頭皮檢測，讓我們從了解開始</p>
       <div class="flex gap-4 justify-center flex-wrap">
-        <a href={BRAND.social.line} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-line text-white rounded-pill px-8 py-3.5 font-medium hover:bg-line-dark hover:-translate-y-0.5 transition-all shadow-md">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5-3.016c.348 0 .63.285.63.631 0 .345-.282.63-.63.63H9.804v1.125h1.706c.349 0 .631.283.631.63 0 .344-.282.629-.631.629H9.078c-.344 0-.626-.285-.626-.629V8.108c0-.345.282-.63.63-.63h2.432c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H9.804v1.125h1.706z"/></svg>
-          LINE 預約
+        <a href={BRAND.social.messenger} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-[#1877F2] text-white rounded-pill px-8 py-3.5 font-medium hover:bg-[#1464c0] hover:-translate-y-0.5 transition-all shadow-md">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Facebook 私訊預約
         </a>
         <a href={`tel:${BRAND.phoneClean}`} class="inline-flex items-center border-[1.5px] border-sage text-sage rounded-pill px-8 py-3.5 font-medium hover:bg-sage hover:text-white hover:-translate-y-0.5 transition-all">
           電話諮詢 {BRAND.phone}

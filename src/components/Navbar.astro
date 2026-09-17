@@ -56,8 +56,8 @@ const currentPath = Astro.url.pathname;
       })}
     </div>
 
-    <a href={BRAND.social.line} target="_blank" rel="noopener noreferrer" class="hidden md:inline-flex items-center bg-line text-white rounded-pill px-5 py-2 text-sm font-medium hover:bg-line-dark transition-colors">
-      LINE 預約
+    <a href="/contact/" class="hidden md:inline-flex items-center bg-sage text-white rounded-pill px-5 py-2 text-sm font-medium hover:bg-sage-dark transition-colors">
+      線上預約
     </a>
 
     <button class="md:hidden flex flex-col gap-[5px] p-2" id="navToggle" aria-label="選單" aria-expanded="false" aria-controls="mobileMenu">
@@ -102,8 +102,8 @@ const currentPath = Astro.url.pathname;
         <a href={link.path} class={`py-3.5 text-lg font-medium border-b border-sage-light transition-colors ${isActive ? 'text-sage' : 'text-text-primary hover:text-sage'}`}>{link.label}</a>
       );
     })}
-    <a href={BRAND.social.line} target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center justify-center bg-line text-white rounded-pill px-5 py-3 text-base font-medium hover:bg-line-dark transition-colors">
-      LINE 預約
+    <a href="/contact/" class="mt-4 inline-flex items-center justify-center bg-sage text-white rounded-pill px-5 py-3 text-base font-medium hover:bg-sage-dark transition-colors">
+      線上預約
     </a>
   </div>
 </div>
